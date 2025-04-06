@@ -2,11 +2,13 @@ import express from 'express'
 import useViewEngine from './configs/viewEngine'
 import useRoutes from './routes/web'
 
-const app = express()
+require('dotenv') // get data from env
 
-const PORT = 3000
+const app = express()
+const PORT = process.env.PORT || 8080
 
 useViewEngine(app)
+
 useRoutes(app)
 
 // app.listen = run app
