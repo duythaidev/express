@@ -1,11 +1,15 @@
-const express = require('express')
+import express from 'express'
+import useViewEngine from './configs/viewEngine'
+import useRoutes from './routes/web'
+
 const app = express()
-const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const PORT = 3000
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+useViewEngine(app)
+useRoutes(app)
+
+// app.listen = run app
+app.listen(PORT, () => {
+    console.log(`Example app listening on PORT ${PORT}`)
 })
