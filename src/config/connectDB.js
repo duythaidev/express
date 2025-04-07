@@ -7,6 +7,7 @@ const connectDB = async () => {
         define: {
             freezeTableName: true, // Không thêm s vào table
         },
+        logging: false,
     });
     try {
         await sequelize.authenticate();

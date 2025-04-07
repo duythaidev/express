@@ -2,9 +2,11 @@
 
 // Xử lý req,res tại controller
 
+import { addUser } from "../services/userService"
+
 
 const handleHomePage = async (req, res) => {
-
+    await addUser()
     return res.render('index.ejs')
 }
 
