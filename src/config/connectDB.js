@@ -5,7 +5,7 @@ const connectDB = async () => {
         host: 'localhost',
         dialect: "mysql",
         define: {
-            freezeTableName: true,
+            freezeTableName: true, // Không thêm s vào table
         },
     });
     try {
