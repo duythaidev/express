@@ -2,7 +2,7 @@
 
 // Xử lý req,res tại controller
 
-import { addUser } from "../services/userService"
+import { addUser, getAllUsers } from "../services/userService"
 
 
 const handleHomePage = async (req, res) => {
@@ -10,7 +10,8 @@ const handleHomePage = async (req, res) => {
     return res.render('index.ejs')
 }
 
-const handleHello = (req, res) => {
+const handleHello = async (req, res) => {
+    await getAllUsers()
     return res.send('Get hello page')
 }
 const handleCreateUser = (req, res) => {
