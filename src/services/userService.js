@@ -7,11 +7,9 @@ const getAllUsers = async () => {
     // console.log(data.get({ plain: true }))
     // await db.User.drop()
 
-    const users = await db.User.findAll({
-        // include: { model: db.Role, where: { id: 1 } },
-    });
-    console.log(users);
-
+    const users = await db.User.findAll({attributes:['id','userName','age']});
+    console.log(users)
+    return users
 }
 
 const addUser = async (userName) => {
@@ -24,8 +22,9 @@ const addUser = async (userName) => {
     //     console.log(error)
     // }
     const data = await db.User.findOne({ where: { id: 1 } });
-
-    console.log(data.get({ plain: true }))
+    if (data != null) {
+        console.log(data.get({ plain: true }))
+    }
 }
 
 export { getAllUsers, addUser }
