@@ -10,7 +10,7 @@ const getAllUsers = async () => {
     const users = await db.User.findAll({
         // include: { model: db.Role, where: { id: 1 } },
     });
-    console.log(JSON.stringify(users, null, 2));
+    console.log(users);
 
 }
 

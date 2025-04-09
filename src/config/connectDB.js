@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
 const connectDB = async () => {
-    const sequelize = new Sequelize('firstdb', 'root', '', {
+    const sequelize = new Sequelize('testdb', 'root', '123456', {
         host: 'localhost',
         dialect: "mysql",
         define: {
