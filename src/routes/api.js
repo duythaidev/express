@@ -5,7 +5,7 @@ const router = Router()
 const Routes = (app) => {
     router.get('/', (req, res) => { return res.send('Backend') })
     router.get('/users', handleGetUser)
-    router.post('/create-user', handleCreateUser)
+    router.post('/users/create', handleCreateUser)
 
     return app.use('/api/v1/', router)
 }
