@@ -2,7 +2,7 @@
 
 // Xử lý req,res tại controller
 
-import { addUser, getAllUsers } from "../services/userService"
+import { addUser, getAllUsers, getAllUsersPaginate } from "../services/userService"
 
 
 const handleHomePage = async (req, res) => {
@@ -32,16 +32,23 @@ const handleCreateUser = async (req, res) => {
 }
 
 
+const handleGetUserPaginate = async (req, res) => {
+
+    try {
+        if (!req.params || !req.params.itemsPerPage || !req.params.page) {
+            throw new Error();
+        }
+        const users = await getAllUsersPaginate(req.params.itemsPerPage, req.params.page)
+        return response(res, 200, 'User list', 0, users)
+    } catch (error) {
+        return response(res, 500, 'Database bug plz fix hmu hmu', -1, null)
+    }
+}
 const handleGetUser = async (req, res) => {
 
     try {
         const users = await getAllUsers()
-        if (users !== null && users.length > 0) {
-            return response(res, 200, 'User list', 0, users)
-        }
-        else {
-            return response(res, 200, 'User list empty', 1, [])
-        }
+        return response(res, 200, 'User list', 0, users)
     } catch (error) {
         return response(res, 500, 'Database bug plz fix hmu hmu', -1, null)
     }
@@ -57,4 +64,4 @@ const response = (res, status, EM, EC, DT = null) => {
 
 
 
-export { handleHomePage, handleHello, handleCreateUser, handleGetUser }
+export { handleHomePage, handleHello, handleCreateUser, handleGetUser, handleGetUserPaginate }

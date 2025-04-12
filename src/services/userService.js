@@ -2,12 +2,25 @@ import { where } from 'sequelize';
 import db from '../models/index'
 
 const getAllUsers = async () => {
-    // const data = await db.User.findOne({ where: { id: 1 } });
-
-    // console.log(data.get({ plain: true }))
-    // await db.User.drop()
-
-    const users = await db.User.findAll({ attributes: ['id', 'userName', 'age'] });
+    const users = await db.User.findAll({
+        attributes: ['id', 'userName', 'age'],
+        include: {
+            model: db.Role,
+            attributes: ['id', 'roleName']
+        }
+    });
+    return users
+}
+const getAllUsersPaginate = async (itemPerPage, page) => {
+    const users = await db.User.findAndCountAll({
+        attributes: ['id', 'userName', 'age'],
+        include: {
+            model: db.Role,
+            attributes: ['id', 'roleName']
+        },
+        limit: +itemPerPage,
+        offset: (page - 1) * +itemPerPage,
+    });
     return users
 }
 
@@ -27,4 +40,4 @@ const addUser = async (userName, age) => {
     return false
 }
 
-export { getAllUsers, addUser }
+export { getAllUsers, addUser, getAllUsersPaginate }
