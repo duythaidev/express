@@ -58,9 +58,9 @@ const handleGetUser = async (req, res) => {
 
 const response = (res, status, EM, EC, DT = null) => {
     return res.status(status).json({
-        EM: EM ? EM : '',
-        EC: EC !== null ? EC : -1,
-        DT: DT ? DT : null
+        EM: '',
+        EC:  null ,
+        DT: null
     });
 }
 

@@ -2,7 +2,7 @@ import { sign } from 'jsonwebtoken';
 require('dotenv').config()
 
 const createToken = (payloadData) => {
-    const token = sign({ data: payloadData }, process.env.SECRET_KEY, { expiresIn: 1000*30 });
+    const token = sign({ data: payloadData }, process.env.SECRET_KEY, { expiresIn: 1000 * 10000 });
     console.log(token)
     return token
 }

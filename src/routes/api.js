@@ -1,15 +1,20 @@
 import { express, Router } from 'express'
 import { handleHomePage, handleHello, handleCreateUser, handleGetUser, handleGetUserPaginate } from '../controllers/homeController'
-import { authService, handleLogin } from '../controllers/authController'
+import { handleLogin, refreshLogin } from '../controllers/authController'
 import { verifyToken } from '../services/JWTService';
 const router = Router()
 
 const Routes = (app) => {
-
-    app.all('/{*any}', authService)
+    
+    router.get('/', (req, res) => {
+        res.send('hello')
+    })
+    router.get('/users', (req, res) => {
+        res.send('hello')
+    })
     router.post('/login', handleLogin)
 
-    router.get('/users', handleGetUser)
+
     router.get('/users/:itemsPerPage/:page', handleGetUserPaginate)
 
     router.post('/users/create', handleCreateUser)
