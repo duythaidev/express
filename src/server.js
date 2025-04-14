@@ -6,16 +6,19 @@ import connectDB from './config/connectDB'
 import fixCors from './config/cors'
 import bodyParser from 'body-parser'
 import useBodyParser from './config/bodyParser'
+import cookieParser from 'cookie-parser'
 
 require('dotenv') // get data from env
 
 const app = express()
 const PORT = process.env.PORT || 8080
 
+
 useBodyParser(app)
 useViewEngine(app)
 
 fixCors(app)
+app.use(cookieParser())
 
 
 useRoutes(app)

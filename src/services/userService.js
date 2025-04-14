@@ -1,4 +1,3 @@
-import { where } from 'sequelize';
 import db from '../models/index'
 
 const getAllUsers = async () => {
@@ -11,6 +10,13 @@ const getAllUsers = async () => {
     });
     return users
 }
+
+
+const loginService = async (userName, age) => {
+
+}
+
+
 const getAllUsersPaginate = async (itemPerPage, page) => {
     const users = await db.User.findAndCountAll({
         attributes: ['id', 'userName', 'age'],
@@ -22,6 +28,19 @@ const getAllUsersPaginate = async (itemPerPage, page) => {
         offset: (page - 1) * +itemPerPage,
     });
     return users
+}
+const getUserByUserName = async (userName) => {
+    const user = await db.User.findOne({
+        attributes: ['id', 'userName', 'age'],
+        include: {
+            model: db.Role,
+            attributes: ['id', 'roleName']
+        },
+        where: {
+            userName: userName,
+        },
+    });
+    return user
 }
 
 const addUser = async (userName, age) => {
@@ -40,4 +59,4 @@ const addUser = async (userName, age) => {
     return false
 }
 
-export { getAllUsers, addUser, getAllUsersPaginate }
+export { getAllUsers, addUser, getAllUsersPaginate, getUserByUserName }

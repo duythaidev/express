@@ -2,6 +2,7 @@
 
 // Xử lý req,res tại controller
 
+import { createToken } from "../services/JWTService"
 import { addUser, getAllUsers, getAllUsersPaginate } from "../services/userService"
 
 
@@ -33,7 +34,9 @@ const handleCreateUser = async (req, res) => {
 
 
 const handleGetUserPaginate = async (req, res) => {
-
+    // console.log(req.cookies)
+    const token = createToken(req.cookies)
+    // console.log(token)
     try {
         if (!req.params || !req.params.itemsPerPage || !req.params.page) {
             throw new Error();
@@ -45,7 +48,6 @@ const handleGetUserPaginate = async (req, res) => {
     }
 }
 const handleGetUser = async (req, res) => {
-
     try {
         const users = await getAllUsers()
         return response(res, 200, 'User list', 0, users)
